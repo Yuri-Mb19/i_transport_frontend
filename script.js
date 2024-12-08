@@ -78,3 +78,58 @@ function setOption(type) {
     }
 }
 
+const testimonials = [
+    {
+        text: "I couldn’t be happier with the transport you did. It was great and your car was amazing. Thank you for your great service and I will continue to refer friends and family to you all.",
+        author: "BETTY FINSEN"
+    },
+    {
+        text: "I hired AutoRide to pick me up at the airport with their Sedan. I had just got back from a long trip in Germany and was very tired. The driver was on time and extremely courteous and I had no problems at all. Great service!",
+        author: "KEVIN FOSTER"
+    },
+    {
+        text: "This is the best service I have had so far. The driver was punctual and very helpful, he knew the city well. His skills helped avoid traffic jams. I will recommend AutoRide to all my friends!",
+        author: "MITCH MICHAEL"
+    },
+    {
+        text: "Great experience with this company. I have used many others in Oakland but this was by far the best. You guys made our trip so easy. Great customer service, wonderful drivers and by far the best and most affordable transportation company I have used. Thank you soo much!",
+        author: "MARK WEBSTER"
+    }
+];
+
+const textElement = document.getElementById("testimonial-text");
+const authorElement = document.getElementById("testimonial-author");
+const dots = document.querySelectorAll(".dot");
+
+dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+        // Atualiza a classe ativa nos pontos
+        dots.forEach(d => d.classList.remove("active"));
+        dot.classList.add("active");
+
+        // Atualiza o texto e o autor
+        textElement.textContent = testimonials[index].text;
+        authorElement.textContent = testimonials[index].author;
+    });
+});
+
+// Define o primeiro ponto como ativo por padrão
+dots[0].classList.add("active");
+
+document.querySelectorAll('.number').forEach((numberElement) => {
+    const target = +numberElement.getAttribute('data-target');
+    let current = 0;
+    const increment = target / 100; // Ajuste para controlar a velocidade da contagem
+
+    const updateNumber = () => {
+        current += increment;
+        if (current >= target) {
+            numberElement.textContent = target; // Garante que o valor final seja exato
+        } else {
+            numberElement.textContent = Math.floor(current);
+            requestAnimationFrame(updateNumber);
+        }
+    };
+
+    updateNumber();
+});
